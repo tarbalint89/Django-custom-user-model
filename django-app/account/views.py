@@ -3,6 +3,11 @@ from django.contrib.auth import login, authenticate
 from account.forms import RegistrationForm
 
 
+def Home(request):
+    context = {}
+    return render(request, "index.html", context)
+
+
 
 def Registration(request):
     context = {}
