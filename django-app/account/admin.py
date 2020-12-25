@@ -2,6 +2,9 @@ from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from account.models import Account
 
+# view site url
+admin.site.site_url = "/"
+
 # timeformat
 from django.conf.locale.en import formats as en_formats
 

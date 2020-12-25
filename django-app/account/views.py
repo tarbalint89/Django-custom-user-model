@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth import login as auth_login, authenticate
+from django.contrib.auth import  authenticate, login as auth_login, logout as auth_logout
 from account.forms import RegistrationForm, AccountAuthenticationForm
 from . import models
 
@@ -50,7 +50,7 @@ def login(request):
             user = authenticate(email=email, password=password)
 
             if user:
-                login(request, user)
+                auth_login(request, user)
                 return redirect("home")
     
     else:
@@ -58,3 +58,8 @@ def login(request):
         context["login_form"] = form
 
     return render(request, "login.html", context)
+
+
+def logout(request):
+    auth_logout(request)
+    return redirect("login")
