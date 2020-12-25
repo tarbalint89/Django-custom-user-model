@@ -2,6 +2,12 @@ from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from account.models import Account
 
+# timeformat
+from django.conf.locale.en import formats as en_formats
+
+en_formats.DATETIME_FORMAT = "Y. m. d, H:i"
+
+
 
 class AccountAdmin(UserAdmin):
     list_display = ("email", "last_name", "first_name", "date_joined", "last_login", "is_admin", "is_staff", "is_active")
