@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% block content %}
+    <p>Current user: <strong>{{request.user}}</strong></p>
     {% for user in users %}
         <p>{{user.last_name}} {{user.first_name}} | {{user.email}}</p>
     {% endfor %}
