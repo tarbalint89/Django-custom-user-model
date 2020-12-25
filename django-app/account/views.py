@@ -1,24 +1,26 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth import login, authenticate
+from django.contrib.auth import login as auth_login, authenticate
 from account.forms import RegistrationForm
+from . import models
 
 
-def Home(request):
+def home(request):
     context = {}
+    context["users"] = models.Account.objects.all()
     return render(request, "index.html", context)
 
 
 
-def Registration(request):
+def registration(request):
     context = {}
     if request.POST:
         form = RegistrationForm(request.POST)
         if form.is_valid():
             form.save()
-            email = form.cleaned_data("email")
+            email = form.cleaned_data.get("email")
             raw_password = form.cleaned_data.get("password1")
             account = authenticate(email=email, password=raw_password)
-            login(request, account)
+            auth_login(request, account)
             return redirect("home")
         else:
             context["registration_form"] = form
@@ -30,3 +32,5 @@ def Registration(request):
     return render(request, "register.html", context)
 
 
+def login(request):
+    return render("home")
